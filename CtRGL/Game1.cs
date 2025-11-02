@@ -146,7 +146,7 @@ namespace CutTheRope
 			base.Window.AllowUserResizing = true;
 			Preferences._loadPreferences();
 			int storedWidth = Preferences._getIntForKey("PREFS_WINDOW_WIDTH");
-            int storedHeight = Preferences._getIntForKey("PREFS_WINDOW_WIDTH");
+            int storedHeight = Preferences._getIntForKey("PREFS_WINDOW_HEIGHT");
             bool isFullScreen = storedWidth <= 0 || Preferences._getBooleanForKey("PREFS_WINDOW_FULLSCREEN");
 			Global.ScreenSizeManager.Init(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode, storedWidth, storedHeight, isFullScreen);
 			base.Window.ClientSizeChanged += Window_ClientSizeChanged;
