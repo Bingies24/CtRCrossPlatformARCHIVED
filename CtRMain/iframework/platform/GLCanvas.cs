@@ -118,16 +118,14 @@ namespace CutTheRope.iframework.platform
 
 		public virtual void setDefaultProjection()
 		{
+			xOffset = Global.ScreenSizeManager.ScaledViewRect.X;
+			xOffsetScaled = (int)((double)((float)(-xOffset) * 1f) / Global.ScreenSizeManager.WidthAspectRatio);
 			if (Global.ScreenSizeManager.IsFullScreen)
 			{
-				xOffset = Global.ScreenSizeManager.ScaledViewRect.X;
-				xOffsetScaled = (int)((double)((float)(-xOffset) * 1f) / Global.ScreenSizeManager.WidthAspectRatio);
 				isFullscreen = true;
 			}
 			else
 			{
-				xOffset = 0;
-				xOffsetScaled = 0;
 				isFullscreen = false;
 			}
 			OpenGL.glViewport(xOffset, yOffset, backingWidth, backingHeight);

@@ -419,9 +419,17 @@ namespace CutTheRope.game
 				back.setRepeatVertically(TileMap.Repeat.REPEAT_ALL);
 				back.addTileQuadwithID(Application.getTexture(textureResID), 0, 0);
 				back.fillStartAtRowColumnRowsColumnswithTile(0, 0, 1, 1, 0);
+				if (base.canvas.backingWidth != Global.ScreenSizeManager.ScaledViewRect.Width)
+				{
+					base.canvas.backingWidth = Global.ScreenSizeManager.ScaledViewRect.Width;
+				}
 				if (base.canvas.isFullscreen)
 				{
 					back.scaleX = (float)Global.ScreenSizeManager.ScreenWidth / (float)base.canvas.backingWidth;
+				}
+				else
+				{
+					back.scaleX = (float)Global.ScreenSizeManager.WindowWidth / (float)base.canvas.backingWidth;
 				}
 				back.scaleX *= 1.25f;
 				back.scaleY *= 1.25f;
@@ -513,10 +521,6 @@ namespace CutTheRope.game
 			timeline.addKeyFrame(KeyFrame.makeRotation(0.0, KeyFrame.TransitionType.FRAME_TRANSITION_LINEAR, 0.3));
 			image.addTimelinewithID(timeline, 0);
 			Image.setElementPositionWithQuadOffset(image, 118, 1);
-			if (base.canvas.isFullscreen)
-			{
-				int screenWidth = Global.ScreenSizeManager.ScreenWidth;
-			}
 			image.scaleX = 0.8f;
 			image.scaleY = 0.8f;
 			image.x += xs;
@@ -3459,15 +3463,16 @@ namespace CutTheRope.game
 			{
 				hudStar[i].x = hudStar[i].width * i + base.canvas.xOffsetScaled;
 			}
+			float currentWidth;
 			if (isFullscreen)
 			{
-				float num = Global.ScreenSizeManager.ScreenWidth;
-				back.scaleX = num / (float)base.canvas.backingWidth * 1.25f;
+				currentWidth = Global.ScreenSizeManager.ScreenWidth;
 			}
 			else
 			{
-				back.scaleX = 1.25f;
+				currentWidth = Global.ScreenSizeManager.WindowWidth;
 			}
+			back.scaleX = currentWidth / (float)base.canvas.backingWidth * 1.25f;
 		}
 
 		private void selector_gameLost(NSObject param)

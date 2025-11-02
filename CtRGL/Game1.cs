@@ -90,14 +90,6 @@ namespace CutTheRope
 			e.GraphicsDeviceInformation.PresentationParameters.DepthStencilFormat = DepthFormat.None;
 		}
 
-		private void form_Resize(object sender, EventArgs e)
-		{
-			if (Global.ScreenSizeManager.SkipSizeChanges)
-			{
-				return;
-			}
-		}
-
 		public void SetCursor(Texture2D cursorTexture, Microsoft.Xna.Framework.Input.MouseCursor cursorMouseCursor, MouseState mouseState)
 		{
 			if (base.Window.ClientBounds.Contains(base.Window.ClientBounds.X + mouseState.X, base.Window.ClientBounds.Y + mouseState.Y) && _cursorTextureLast != cursorTexture)

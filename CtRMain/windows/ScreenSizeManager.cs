@@ -9,7 +9,9 @@ namespace CutTheRope.windows
 {
 	internal class ScreenSizeManager
 	{
-		public const int MIN_WINDOW_WIDTH = 800;
+		public const int MIN_WINDOW_WIDTH = 200;
+
+		public const int MIN_WINDOW_HEIGHT = 200;
 
 		private bool _isFullScreen;
 
@@ -39,7 +41,19 @@ namespace CutTheRope.windows
 			}
 		}
 
-		public int WindowWidth
+		public static int MAX_WINDOW_HEIGHT
+		{
+			get
+			{
+				if (Global.GraphicsDeviceManager.GraphicsProfile == GraphicsProfile.HiDef)
+				{
+					return 4096;
+				}
+				return 2048;
+			}
+		}
+
+        public int WindowWidth
 		{
 			get
 			{
@@ -161,27 +175,40 @@ namespace CutTheRope.windows
 		public void Init(DisplayMode displayMode, int windowWidth, int windowHeight, bool isFullScreen)
 		{
 			FullScreenRectChanged(displayMode);
-			int num = ((windowWidth > 0) ? windowWidth : (displayMode.Width - 100));
-			if (num < 800)
+			int width = ((windowWidth > 0) ? windowWidth : (displayMode.Width - 100));
+			int height = ((windowHeight > 0) ? windowHeight : (displayMode.Height - 100));
+			if (width < MIN_WINDOW_WIDTH)
 			{
-				num = 800;
+				width = MIN_WINDOW_WIDTH;
 			}
-			if (num > MAX_WINDOW_WIDTH)
+			if (width > MAX_WINDOW_WIDTH)
 			{
-				num = MAX_WINDOW_WIDTH;
+				width = MAX_WINDOW_WIDTH;
 			}
-			if (num > displayMode.Width)
+			if (width > displayMode.Width)
 			{
-				num = displayMode.Width;
+				width = displayMode.Width;
 			}
-			WindowRectChanged(new Microsoft.Xna.Framework.Rectangle(0, 0, num, ScaledGameHeight(num)));
+			if (height < MIN_WINDOW_HEIGHT)
+			{
+				height = MIN_WINDOW_HEIGHT;
+			}
+			if (height > MAX_WINDOW_HEIGHT)
+			{
+				height = MAX_WINDOW_HEIGHT;
+			}
+			if (height > displayMode.Height)
+			{
+				height = displayMode.Height;
+			}
+			WindowRectChanged(new Microsoft.Xna.Framework.Rectangle(0, 0, width, height));
 			if (isFullScreen)
 			{
 				ToggleFullScreen();
 			}
 			else
 			{
-				ApplyWindowSize(WindowWidth);
+				ApplyWindowSize(WindowWidth, WindowHeight);
 			}
 		}
 
@@ -213,11 +240,11 @@ namespace CutTheRope.windows
 			}
 		}
 
-		public void ApplyWindowSize(int width)
+		public void ApplyWindowSize(int width, int height)
 		{
 			GraphicsDeviceManager graphicsDeviceManager = Global.GraphicsDeviceManager;
 			graphicsDeviceManager.PreferredBackBufferWidth = width;
-			graphicsDeviceManager.PreferredBackBufferHeight = ScaledGameHeight(width);
+			graphicsDeviceManager.PreferredBackBufferHeight = height;
 			graphicsDeviceManager.ApplyChanges();
 			WindowRectChanged(new Microsoft.Xna.Framework.Rectangle(0, 0, graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight));
 		}
@@ -251,28 +278,41 @@ namespace CutTheRope.windows
 			{
 				try
 				{
-					int num = graphicsDeviceManager.PreferredBackBufferWidth;
+					int width = graphicsDeviceManager.PreferredBackBufferWidth;
+					int height = graphicsDeviceManager.PreferredBackBufferHeight;
 					if (newWindowRect.Width != WindowWidth)
 					{
-						num = newWindowRect.Width;
+						width = newWindowRect.Width;
 					}
-					else if (newWindowRect.Height != WindowHeight)
+					if (width < MIN_WINDOW_WIDTH)
 					{
-						num = ScaledGameWidth(newWindowRect.Height);
+						width = MIN_WINDOW_WIDTH;
 					}
-					if (num < 800 || ScaledGameHeight(num) < ScaledGameHeight(800))
+					if (width > MAX_WINDOW_WIDTH)
 					{
-						num = 800;
+						width = MAX_WINDOW_WIDTH;
 					}
-					if (num > MAX_WINDOW_WIDTH)
+					if (width > ScreenWidth)
 					{
-						num = MAX_WINDOW_WIDTH;
+						width = ScreenWidth;
 					}
-					if (num > ScreenWidth)
+					if (newWindowRect.Height != WindowHeight)
 					{
-						num = ScreenWidth;
+						height = newWindowRect.Height;
 					}
-					ApplyWindowSize(num);
+					if (height < MIN_WINDOW_HEIGHT)
+					{
+						height = MIN_WINDOW_HEIGHT;
+					}
+					if (height > MAX_WINDOW_HEIGHT)
+					{
+						height = MAX_WINDOW_HEIGHT;
+					}
+					if (height > ScreenHeight)
+					{
+						height = ScreenHeight;
+					}
+					ApplyWindowSize(width, height);
 				}
 				catch (Exception)
 				{
