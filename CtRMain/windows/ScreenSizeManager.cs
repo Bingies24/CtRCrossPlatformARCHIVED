@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics; // REMOVE LATER
 using System.Drawing;
 using System.Runtime.InteropServices;
 using CutTheRope.iframework.core;
@@ -228,16 +229,17 @@ namespace CutTheRope.windows
 			{
 				return;
 			}
+			Microsoft.Xna.Framework.Rectangle baseRect = _windowRect;
 			if (_isFullScreen)
 			{
-				int height = _fullScreenRect.Height;
-				int width = ScaledGameWidth(height);
-				_scaledViewRect = new Microsoft.Xna.Framework.Rectangle((_fullScreenRect.Width - width) / 2, (_fullScreenRect.Height - height) / 2, width, height);
+				baseRect = _fullScreenRect;
 			}
-			else
-			{
-				_scaledViewRect = _windowRect;
-			}
+			int height = baseRect.Height;
+			int width = ScaledGameWidth(height);
+			_scaledViewRect = new Microsoft.Xna.Framework.Rectangle((baseRect.Width - width) / 2, (baseRect.Height - height) / 2, width, height);
+			Debug.WriteLine($"Fullscreen: {IsFullScreen}"); // REMOVE LATER
+			Debug.WriteLine($"Base X: {baseRect.X}, Base Y: {baseRect.Y}, Base Width: {baseRect.Width}, Base Height: {baseRect.Height}"); // REMOVE LATER
+			Debug.WriteLine($"Scaled X: {_scaledViewRect.X}, Scaled Y: {_scaledViewRect.Y}, Scaled Width: {_scaledViewRect.Width}, Scaled Height: {_scaledViewRect.Height}"); // REMOVE LATER
 		}
 
 		public void ApplyWindowSize(int width, int height)
