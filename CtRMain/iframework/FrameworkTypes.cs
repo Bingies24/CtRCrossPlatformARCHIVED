@@ -8,7 +8,6 @@ using CutTheRope.iframework.helpers;
 using CutTheRope.iframework.platform;
 using CutTheRope.ios;
 using CutTheRope.windows;
-//using Microsoft.Xna.Framework.GamerServices;
 
 namespace CutTheRope.iframework
 {
@@ -28,37 +27,14 @@ namespace CutTheRope.iframework
 				openUrl(url.ToString());
 			}
 
-			/*
-			public static void ShowMessageBox(string str, MessageBoxIcon icon)
-			{
-				try
-				{
-					List<string> list = new List<string>();
-					list.Add("OK");
-					Guide.BeginShowMessageBox("Cut the Rope", str, list, 0, icon, null, null);
-				}
-				catch (Exception)
-				{
-				}
-			}
-			*/
-
 			public static void openUrl(string url)
 			{
 				try
 				{
 					Process.Start(url);
 				}
-				catch (Win32Exception ex)
+				catch (Exception)
 				{
-					if (ex.ErrorCode == -2147467259)
-					{
-						//ShowMessageBox(ex.Message, MessageBoxIcon.Error);
-					}
-				}
-				catch (Exception ex2)
-				{
-					//ShowMessageBox(ex2.Message, MessageBoxIcon.Error);
 				}
 			}
 
