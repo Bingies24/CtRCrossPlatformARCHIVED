@@ -13,12 +13,14 @@ This is a better version of the Cut the Rope Decompilation which can be found on
 
 ## To-do
 
-* Fix game and window scaling. Almost done!
+* Fix game and window scaling.
+ * It works, but slim vertical resolutions are in pain.
+ * Make the UI scale right when the scaled game view is smaller than expected.
 * Add(?)/fix horizontal scrolling.
 * Add/enable(?) background looping.
-* Implement PL\_MPEG as a video player.
+* Implement PL\_MPEG as a video player. This is the last requirement for starting the game from a new save.
 * Add touchscreen support.
-* Make an Android version.
+* Make an experimental Android version.
 
 
 
