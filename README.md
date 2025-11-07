@@ -13,9 +13,7 @@ This is a better version of the Cut the Rope Decompilation which can be found on
 
 ## To-do
 
-* Fix game and window scaling.
- * It works, but slim vertical resolutions are in pain.
- * Make the UI scale right when the scaled game view is smaller than expected.
+* Make the UI for slim vertical resolutions scale to be smaller when the scaled game view is smaller than expected.
 * Add(?)/fix horizontal scrolling.
 * Add/enable(?) background looping.
 * Implement PL\_MPEG as a video player. This is the last requirement for starting the game from a new save.
