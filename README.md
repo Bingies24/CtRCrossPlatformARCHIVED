@@ -13,7 +13,7 @@ This is a better version of the Cut the Rope Decompilation which can be found on
 
 ## To-do
 
-* Fix game and window scaling. At least fullscreen works.
+* Fix game and window scaling. Almost done!
 * Add(?)/fix horizontal scrolling.
 * Add/enable(?) background looping.
 * Implement PL\_MPEG as a video player.

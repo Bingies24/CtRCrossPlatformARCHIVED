@@ -3463,14 +3463,10 @@ namespace CutTheRope.game
 			{
 				hudStar[i].x = hudStar[i].width * i + base.canvas.xOffsetScaled;
 			}
-			float currentWidth;
+			float currentWidth = Global.ScreenSizeManager.WindowWidth;
 			if (isFullscreen)
 			{
 				currentWidth = Global.ScreenSizeManager.ScreenWidth;
-			}
-			else
-			{
-				currentWidth = Global.ScreenSizeManager.WindowWidth;
 			}
 			back.scaleX = currentWidth / (float)base.canvas.backingWidth * 1.25f;
 		}

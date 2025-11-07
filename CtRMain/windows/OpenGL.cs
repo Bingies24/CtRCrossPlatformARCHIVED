@@ -165,7 +165,7 @@ namespace CutTheRope.windows
 
 		public static void CopyFromRenderTargetToScreen()
 		{
-			if (Global.ScreenSizeManager.IsFullScreen && s_RenderTarget != null)
+			if (s_RenderTarget != null)
 			{
 				Global.GraphicsDevice.Clear(Color.Black);
 				Global.SpriteBatch.Begin();
@@ -185,19 +185,11 @@ namespace CutTheRope.windows
 			s_Viewport.Y = y;
 			s_Viewport.Width = width;
 			s_Viewport.Height = height;
-			if (Global.ScreenSizeManager.IsFullScreen)
+			if (s_RenderTarget == null || s_RenderTarget.Bounds.Width != s_Viewport.Bounds.Width || s_RenderTarget.Bounds.Height != s_Viewport.Bounds.Height)
 			{
-				if (s_RenderTarget == null || s_RenderTarget.Bounds.Width != s_Viewport.Bounds.Width || s_RenderTarget.Bounds.Height != s_Viewport.Bounds.Height)
-				{
-					s_RenderTarget = new RenderTarget2D(Global.GraphicsDevice, s_Viewport.Width, s_Viewport.Height, false, SurfaceFormat.Color, DepthFormat.None);
-				}
-				Global.GraphicsDevice.SetRenderTarget(s_RenderTarget);
-				Global.GraphicsDevice.Clear(Color.Black);
+				s_RenderTarget = new RenderTarget2D(Global.GraphicsDevice, s_Viewport.Width, s_Viewport.Height, false, SurfaceFormat.Color, DepthFormat.None);
 			}
-			else
-			{
-				s_RenderTarget = null;
-			}
+			Global.GraphicsDevice.SetRenderTarget(s_RenderTarget);
 		}
 
 		public static void glMatrixMode(int mode)

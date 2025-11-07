@@ -236,6 +236,7 @@ namespace CutTheRope.windows
 			}
 			int height = baseRect.Height;
 			int width = ScaledGameWidth(height);
+			// Add conditional code to make the UI respect the renderers pillarboxing
 			_scaledViewRect = new Microsoft.Xna.Framework.Rectangle((baseRect.Width - width) / 2, (baseRect.Height - height) / 2, width, height);
 			Debug.WriteLine($"Fullscreen: {IsFullScreen}"); // REMOVE LATER
 			Debug.WriteLine($"Base X: {baseRect.X}, Base Y: {baseRect.Y}, Base Width: {baseRect.Width}, Base Height: {baseRect.Height}"); // REMOVE LATER

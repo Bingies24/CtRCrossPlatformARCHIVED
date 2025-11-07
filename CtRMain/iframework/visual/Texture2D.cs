@@ -369,17 +369,8 @@ namespace CutTheRope.iframework.visual
 			float transitionTime = Application.sharedRootController().transitionTime;
 			Application.sharedRootController().transitionTime = -1f;
 			RenderTarget2D renderTarget;
-			if (Global.ScreenSizeManager.IsFullScreen)
-			{
-				CtrRenderer.onDrawFrame();
-				renderTarget = OpenGL.DetachRenderTarget();
-			}
-			else
-			{
-				renderTarget = new RenderTarget2D(Global.GraphicsDevice, Global.GraphicsDevice.PresentationParameters.BackBufferWidth, Global.GraphicsDevice.PresentationParameters.BackBufferHeight, false, SurfaceFormat.Color, DepthFormat.None);
-				Global.GraphicsDevice.SetRenderTarget(renderTarget);
-				CtrRenderer.onDrawFrame();
-			}
+			CtrRenderer.onDrawFrame();
+			renderTarget = OpenGL.DetachRenderTarget();
 			Global.GraphicsDevice.SetRenderTarget(null);
 			Application.sharedRootController().transitionTime = transitionTime;
 			xnaTexture_ = renderTarget;
