@@ -213,14 +213,22 @@ namespace CutTheRope.windows
 			}
 		}
 
-		public int ScaledGameWidth(int scaledHeight)
+		public int ScaledGameWidth(int scaledHeight, double gameAspect = 0)
 		{
-			return (int)((double)scaledHeight / _gameAspectRatio + 0.5);
+			if (gameAspect == (double)0)
+			{
+				gameAspect = _gameAspectRatio;
+			}
+			return (int)((double)scaledHeight / gameAspect + 0.5);
 		}
 
-		public int ScaledGameHeight(int scaledWidth)
+		public int ScaledGameHeight(int scaledWidth, double gameAspect = 0)
 		{
-			return (int)((double)scaledWidth * _gameAspectRatio + 0.5);
+			if (gameAspect == (double)0)
+			{
+				gameAspect = _gameAspectRatio;
+			}
+			return (int)((double)scaledWidth * gameAspect + 0.5);
 		}
 
 		private void UpdateScaledView()
@@ -240,6 +248,7 @@ namespace CutTheRope.windows
 			Debug.WriteLine($"Fullscreen: {IsFullScreen}"); // REMOVE LATER
 			Debug.WriteLine($"Base X: {baseRect.X}, Base Y: {baseRect.Y}, Base Width: {baseRect.Width}, Base Height: {baseRect.Height}"); // REMOVE LATER
 			Debug.WriteLine($"Scaled X: {_scaledViewRect.X}, Scaled Y: {_scaledViewRect.Y}, Scaled Width: {_scaledViewRect.Width}, Scaled Height: {_scaledViewRect.Height}"); // REMOVE LATER
+			Debug.WriteLineIf(baseRect.Width < ScaledGameWidth(height, (double)3 / (double)2), "The current aspect ratio is less than 2:3!");
 		}
 
 		public void ApplyWindowSize(int width, int height)
