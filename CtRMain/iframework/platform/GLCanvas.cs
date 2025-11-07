@@ -9,10 +9,6 @@ namespace CutTheRope.iframework.platform
 {
 	internal class GLCanvas : NSObject
 	{
-		public const float MASTER_WIDTH = 2560f;
-
-		public const float MASTER_HEIGHT = 1440f;
-
 		private int origWidth;
 
 		private int origHeight;
@@ -74,9 +70,9 @@ namespace CutTheRope.iframework.platform
 		{
 			xOffset = 0;
 			yOffset = 0;
-			origWidth = (backingWidth = 2560);
-			origHeight = (backingHeight = 1440);
-			aspect = (float)backingHeight / (float)backingWidth;
+			backingWidth = 2560;
+			backingHeight = 1440;
+			setResolutionAndAspect(backingWidth, backingHeight);
 			touchesCount = 0;
 			return this;
 		}
@@ -134,6 +130,13 @@ namespace CutTheRope.iframework.platform
 			OpenGL.glOrthof(0.0, origWidth, origHeight, 0.0, -1.0, 1.0);
 			OpenGL.glMatrixMode(14);
 			OpenGL.glLoadIdentity();
+		}
+
+		public virtual void setResolutionAndAspect(int width, int height)
+		{
+			origWidth = width;
+			origHeight = height;
+			aspect = (float)((double)height / (double)width);
 		}
 
 		public virtual void drawRect(NSRect rect)
