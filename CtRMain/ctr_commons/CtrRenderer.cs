@@ -362,5 +362,20 @@ namespace CutTheRope.ctr_commons
 				Application.sharedRootController().performTick(delta2);
 			}
 		}
+
+		public static CTRApp gApp_Public
+		{
+			get
+			{
+				if (gApp != null)
+				{
+					return gApp;
+				}
+				else
+				{
+					return new CTRApp();
+				}
+			}
+		}
 	}
 }

@@ -4,6 +4,7 @@ using CutTheRope.iframework.media;
 using CutTheRope.iframework.platform;
 using CutTheRope.iframework.visual;
 using CutTheRope.ios;
+using CutTheRope.windows;
 
 namespace CutTheRope.iframework.core
 {
@@ -113,7 +114,7 @@ namespace CutTheRope.iframework.core
 				}
 				appSettings.setString(8, NSObject.NSS(text));
 			}
-			updateOrientation();
+			updateOrientation((float)Global.ScreenSizeManager.GameWidth, (float)Global.ScreenSizeManager.GameHeight);
 			FrameworkTypes.IS_IPAD = false;
 			FrameworkTypes.IS_RETINA = false;
 			root = createRootController();
@@ -143,10 +144,10 @@ namespace CutTheRope.iframework.core
 			return (NSString)sharedResourceMgr().loadResource(strResID, ResourceMgr.ResourceType.STRINGS);
 		}
 
-		public virtual void updateOrientation()
+		public virtual void updateOrientation(float width, float height)
 		{
-			FrameworkTypes.PORTRAIT_SCREEN_WIDTH = 2560f;
-			FrameworkTypes.PORTRAIT_SCREEN_HEIGHT = 1440f;
+			FrameworkTypes.PORTRAIT_SCREEN_WIDTH = width;
+			FrameworkTypes.PORTRAIT_SCREEN_HEIGHT = height;
 			FrameworkTypes.SCREEN_WIDTH = FrameworkTypes.PORTRAIT_SCREEN_WIDTH;
 			FrameworkTypes.SCREEN_HEIGHT = FrameworkTypes.PORTRAIT_SCREEN_HEIGHT;
 		}

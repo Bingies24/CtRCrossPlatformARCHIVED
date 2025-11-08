@@ -1,7 +1,6 @@
 using System;
-using System.Diagnostics; // REMOVE LATER
-using System.Drawing;
-using System.Runtime.InteropServices;
+//using System.Diagnostics;
+using CutTheRope.ctr_commons;
 using CutTheRope.iframework.core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -219,7 +218,7 @@ namespace CutTheRope.windows
 			{
 				gameAspect = _gameAspectRatio;
 			}
-			return (int)((double)scaledHeight / gameAspect + 0.5);
+			return (int)((double)scaledHeight / gameAspect);
 		}
 
 		public int ScaledGameHeight(int scaledWidth, double gameAspect = 0)
@@ -228,7 +227,7 @@ namespace CutTheRope.windows
 			{
 				gameAspect = _gameAspectRatio;
 			}
-			return (int)((double)scaledWidth * gameAspect + 0.5);
+			return (int)((double)scaledWidth * gameAspect);
 		}
 
 		private void UpdateScaledView()
@@ -244,11 +243,26 @@ namespace CutTheRope.windows
 			}
 			int height = baseRect.Height;
 			int width = ScaledGameWidth(height);
+			int internalWidth = 2560;
+			int internalHeight = 1440;
+
+			// Vertical Resolution Stuff
+			double verticalAspect = (double)3 / (double)2;
+			if (baseRect.Width < ScaledGameWidth(height, verticalAspect)) // This checks if the game is taller than 2:3, or whatever aspect ratio verticalAspect is set too.
+			{
+				double verticalScale = (double)((double)1440 / (double)ScaledGameHeight(baseRect.Width, verticalAspect));
+				internalHeight = (int)((double)baseRect.Height * verticalScale);
+				width = (int)((double)width / (double)((double)internalHeight / (double)1440));
+			}
+			Global.ScreenSizeManager._gameWidth = internalWidth;
+			Global.ScreenSizeManager._gameHeight = internalHeight;
+			global::CutTheRope.iframework.core.Application.sharedCanvas().setResolutionAndAspect(internalWidth, internalHeight); // Canvas width and height.
+			CtrRenderer.gApp_Public.updateOrientation(internalWidth, internalHeight); // CtrRenderer/CTRApp/Application width and height.
+
 			_scaledViewRect = new Microsoft.Xna.Framework.Rectangle((baseRect.Width - width) / 2, (baseRect.Height - height) / 2, width, height);
-			Debug.WriteLine($"Fullscreen: {IsFullScreen}"); // REMOVE LATER
-			Debug.WriteLine($"Base X: {baseRect.X}, Base Y: {baseRect.Y}, Base Width: {baseRect.Width}, Base Height: {baseRect.Height}"); // REMOVE LATER
-			Debug.WriteLine($"Scaled X: {_scaledViewRect.X}, Scaled Y: {_scaledViewRect.Y}, Scaled Width: {_scaledViewRect.Width}, Scaled Height: {_scaledViewRect.Height}"); // REMOVE LATER
-			Debug.WriteLineIf(baseRect.Width < ScaledGameWidth(height, (double)3 / (double)2), "The current aspect ratio is less than 2:3!");
+			//Debug.WriteLine($"Fullscreen: {IsFullScreen}");
+			//Debug.WriteLine($"Base X: {baseRect.X}, Base Y: {baseRect.Y}, Base Width: {baseRect.Width}, Base Height: {baseRect.Height}");
+			//Debug.WriteLine($"Scaled X: {_scaledViewRect.X}, Scaled Y: {_scaledViewRect.Y}, Scaled Width: {_scaledViewRect.Width}, Scaled Height: {_scaledViewRect.Height}");
 		}
 
 		public void ApplyWindowSize(int width, int height)
