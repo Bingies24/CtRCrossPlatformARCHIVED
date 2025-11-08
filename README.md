@@ -18,7 +18,17 @@ This is a better version of the Cut the Rope Decompilation which can be found on
 * Add/enable(?) background looping.
 * Implement PL\_MPEG as a video player. This is the last requirement for starting the game from a new save.
 * Add touchscreen support.
-* Make an experimental Android version.
+
+
+
+## Future Plans
+
+* A cleaner and maybe reorganized codebase.
+* New sprite system.
+* Dynamic box system, with music and graphics options.
+* Windows Phone 7 and Experiments (Windows Phone 7) objects.
+* A bunch of easily changeable custom settings for mods. (PC or Mobile physics, menu layout stuff, trajectory detection for socks/hats, etc.)
+* New built-in boxes: Original (1-14 from Windows Phone 7), Experiments (1-6 from Windows Phone 7), Special (Pinned Box from CtR IE9, Holiday Gift)
 
 
 
