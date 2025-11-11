@@ -13,11 +13,12 @@ This is a better version of the Cut the Rope Decompilation which can be found on
 
 ## To-do
 
+* Implement [libvlcsharp](https://github.com/videolan/libvlcsharp) as a video player. This is the last requirement for starting the game from a new save.
 * Make the UI for slim vertical resolutions scale to be smaller when the scaled game view is smaller than expected.
 * Add(?)/fix horizontal scrolling.
 * Add/enable(?) background looping.
-* Implement PL\_MPEG as a video player. This is the last requirement for starting the game from a new save.
 * Add touchscreen support.
+* Redo literally everything I did with [this codebase](https://github.com/yell0wsuit/ctr-pc) instead.
 
 
 
