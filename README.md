@@ -1,4 +1,8 @@
-# Cut the Rope Cross Platform Decompilation
+# Cut the Rope Cross Platform Decompilation (ARCHIVED)
+
+The project has restarted [here](https://github.com/Bingies24/CtRCrossPlatform).
+
+
 
 This is a better version of the Cut the Rope Decompilation which can be found on [Cut the Rope Home](https://ctrhome.github.io) (specifically the original unpatched version on the Discord server) that has been freed from the clutches of WinForms for future modding.
 
